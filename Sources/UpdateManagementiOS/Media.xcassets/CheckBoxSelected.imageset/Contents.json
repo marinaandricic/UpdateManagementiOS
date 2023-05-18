@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "InviteCheckboxSelected.png",
+      "filename" : "CheckBoxSelected.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "InviteCheckboxSelected@2x.png",
+      "filename" : "CheckBoxSelected@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
