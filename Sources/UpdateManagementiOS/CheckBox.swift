@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
 class CheckBox: UIButton {
+    
     // Images for checkbox states
-    let checkedImage = Common.getImage(name: "CheckBoxSelected")
-    let uncheckedImage =  Common.getImage(name: "CheckBoxUnSelected")
+    let checkedImage =  UIImage(named: "CheckBoxSelected")
+    let uncheckedImage = UIImage(named: "CheckBoxUnSelected")
     
     // Bool property to track the checked state
     var isChecked: Bool = false {
