@@ -59,12 +59,11 @@ extension UpdateManagementiOS {
             if (checkbox.isChecked && self.updateManagerFields.type == UpdateMode.Optional.rawValue) {
                 self.sessionManager.removeValue(forKey: "UpdateManagerReminderDate")
                 self.sessionManager.setValue("false", forKey: "UpdateManagerReminderShow")
-                //  UserDefaults.sharedGroup?.UpdateManagerReminderShow = false
-                //  UserDefaults.sharedGroup?.clearUpdateManagerRecurringAlert()
             } else {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         })
+        
         let remindLaterAction = UIAlertAction(title: "Cancel", style: .default, handler: { action in
             self.setOptionalReminderDate()
         })
@@ -111,17 +110,17 @@ extension UpdateManagementiOS {
     // Different title will be displayed for mandatory and optional alerts
     func getDialogTitle() -> String {
         if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
-            return String(NSLocalizedString(localisedText.UpdateManagementOptionalTitle, comment: ""))
+            return String(NSLocalizedString(localizedText.UpdateManagementOptionalTitle, comment: ""))
         }
         else {
-            return String(NSLocalizedString(localisedText.UpdateManagementMandatoryTitle, comment: ""))
+            return String(NSLocalizedString(localizedText.UpdateManagementMandatoryTitle, comment: ""))
         }
     }
     
-    // Different body will be displayed for mandatory, madatory with date and optional alerts
+    // Different message will be displayed for mandatory, madatory with date and optional alerts
     private func getDialogBody(brand: String) -> String {
         if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
-            return String(format: NSLocalizedString(localisedText.UpdateManagementOptional, comment: ""), brand, self.updateManagerFields.version, self.updateManagerFields.platformMinTarget!)
+            return String(format: NSLocalizedString(localizedText.UpdateManagementOptional, comment: ""), brand, self.updateManagerFields.version, self.updateManagerFields.platformMinTarget!)
         }
         else {
             if let updateBy = self.updateManagerFields.updateBy, updateBy != "" {
@@ -129,31 +128,29 @@ extension UpdateManagementiOS {
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm.ssZ"
                 if let optionalUpdateEndDate = dateFormatter.date(from: updateBy) {
                     dateFormatter.dateFormat = "yyyy-MM-dd"
-                    return String(format: NSLocalizedString(localisedText.UpdateManagementMandatoryWithDate, comment: ""), brand, dateFormatter.string(from: optionalUpdateEndDate), self.updateManagerFields.version)
+                    return String(format: NSLocalizedString(localizedText.UpdateManagementMandatoryWithDate, comment: ""), brand, dateFormatter.string(from: optionalUpdateEndDate), self.updateManagerFields.version)
                 } else {
-                    return String(format: NSLocalizedString(localisedText.UpdateManagementMandatoryWithDate, comment: ""), brand, updateBy, self.updateManagerFields.version)
+                    return String(format: NSLocalizedString(localizedText.UpdateManagementMandatoryWithDate, comment: ""), brand, updateBy, self.updateManagerFields.version)
                 }
             } else {
-                return String(format: NSLocalizedString(localisedText.UpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.version)
+                return String(format: NSLocalizedString(localizedText.UpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.version)
             }
         }
     }
-    
-    // Different body will be displayed for mandatory
-    
+     
     func getDialogBodyiOSUpgrade(brand: String) -> String {
         if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
-            return String(format: NSLocalizedString(localisedText.UpdateiOSForUpdateManagementOptional, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
+            return String(format: NSLocalizedString(localizedText.UpdateiOSForUpdateManagementOptional, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
         }
         else {
-            return String(format: NSLocalizedString(localisedText.UpdateiOSUpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
+            return String(format: NSLocalizedString(localizedText.UpdateiOSUpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
         }
     }
     
     var isMandatoryOptional: Bool {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm.ssZ"
         
         let currentDate = Date()
         if let optionalUpdateEndDateString = self.updateManagerFields.updateBy {
@@ -171,35 +168,20 @@ extension UpdateManagementiOS {
     
     func getOptionalReminderDate() -> Bool {
         let currentDate = Date()
-        var iOptional = true
-        self.sessionManager.removeValue(forKey: "UpdateManagerReminderDate")
-        self.sessionManager.setValue("false", forKey: "UpdateManagerReminderShow")
-         
-        if let reminderDate = sessionManager.getValue(forKey: "UpdateManagerReminderDate") {
-            if currentDate == reminderDate as! Date {
-                iOptional = self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as? Bool ?? true
-            }
-            else if currentDate < reminderDate as! Date {
-                iOptional = false
-            }
+        
+        if let reminderDate = sessionManager.getValue(forKey: "UpdateManagerReminderDate") , currentDate == reminderDate as! Date {
+            
+            return   self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as? Bool ?? true
+        } else if let reminderDate = sessionManager.getValue(forKey: "UpdateManagerReminderDate") , currentDate < reminderDate as! Date {
+            return false
         }
         else {
             self.sessionManager.setValue(currentDate, forKey: "UpdateManagerReminderDate")
-            iOptional = self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as? Bool ?? true
+            return self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as? Bool ?? true
         }
-        return iOptional
-        // if let reminderDate = UserDefaults.sharedGroup?.updateManagerRecurringAlert , currentDate == reminderDate {
-        //     return   UserDefaults.sharedGroup?.UpdateManagerReminderShow ?? true
-        // } else if let reminderDate = UserDefaults.sharedGroup?.updateManagerRecurringAlert , currentDate < reminderDate {
-        //return false
-        //}
-        //else {
-        //     UserDefaults.sharedGroup?.updateManagerRecurringAlert =  currentDate
-        //    return UserDefaults.sharedGroup?.UpdateManagerReminderShow  ?? true
-        // }
     }
     
-    // updateManagerRecurringAlert is used to save date for next alert
+    // UpdateManagerReminderDate is used to save date for next alert
     func setOptionalReminderDate() {
         let currentDate = Date()
         let calendar = Calendar.current
@@ -208,7 +190,6 @@ extension UpdateManagementiOS {
         
         if let reminderDare = calendar.date(byAdding: dateComponents, to: currentDate) {
             self.sessionManager.setValue(reminderDare, forKey: "UpdateManagerReminderDate")
-            //UserDefaults.sharedGroup?.updateManagerRecurringAlert =  reminderDare
         }
     }
 }
@@ -239,11 +220,11 @@ class UpdateManagerFields {
         case "platformMinTarget":
             self.platformMinTarget =  value
         case "version":
-            self.version = "12.15.1"//value
+            self.version = value
         case "type":
-            self.type = "optional"//value.lowercased()
+            self.type = value.lowercased()
         case "updateBy":
-            self.updateBy = ""// value //"2023-05-31" //
+            self.updateBy = value //"2023-05-31" //
         case "updateURL":
             self.updateURL =  value
         case "reminders":
@@ -256,7 +237,9 @@ class UpdateManagerFields {
     }
 }
 
-class LocalisedText {
+class LocalizedText {
+    let JSONUrl = "https://j2-update.netlify.app/%@_iOS_current.json"
+    
     let UpdateManagementOptionalTitle = "Update Available"
     let UpdateManagementMandatoryTitle = "Update Required";
     let UpdateManagementOptional = "A new version of %@ is available. Would you like to update to version %@ now? \n\n";

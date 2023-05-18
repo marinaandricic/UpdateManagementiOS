@@ -11,8 +11,8 @@ import UIKit
 public class UpdateManagementiOS: NSObject {
     
     var sessionManager = SessionManager()
-    let updateManagerFields = UpdateManagerFields().self;
-    let localisedText = LocalisedText().self;
+    let updateManagerFields = UpdateManagerFields();
+    let localizedText = LocalizedText();
     
     public var requireLogout = false;
     
@@ -32,7 +32,7 @@ public class UpdateManagementiOS: NSObject {
     public func Start( completion: @escaping (Bool) -> Void)  {
         
         //URL USED FOR TEST ONLY
-        let urlForBrand = String(format: NSLocalizedString("https://j2-update.netlify.app/%@_iOS_current.json", comment: ""), self.brand)
+        let urlForBrand = String(format: NSLocalizedString(localizedText.JSONUrl, comment: ""), self.brand)
         if let fileURL = URL(string: urlForBrand) {
             
             let session = URLSession.shared
@@ -123,11 +123,9 @@ public class UpdateManagementiOS: NSObject {
                 }
             }
         } else {
-            // NOTE if version on server is greater we need to clear session for recurring Update alerts and re-set UpdateManagerReminderShow to true
+            // if version on server is greater than local we clear session for recurring Update alerts and re-set UpdateManagerReminderShow to true
             sessionManager.removeValue(forKey: "UpdateManagerReminderDate")
             sessionManager.setValue("true", forKey: "UpdateManagerReminderShow")
-            // UserDefaults.sharedGroup?.clearUpdateManagerRecurringAlert();
-            // UserDefaults.sharedGroup?.UpdateManagerReminderShow = true
         }
     }
 }
