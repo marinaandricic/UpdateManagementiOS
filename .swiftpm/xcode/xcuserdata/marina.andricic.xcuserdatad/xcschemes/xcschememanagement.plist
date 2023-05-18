@@ -10,5 +10,23 @@
 			<integer>0</integer>
 		</dict>
 	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>UpdateManagementiOS</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>UpdateManagementiOSObjC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>UpdateManagementiOSTests</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
 </dict>
 </plist>
