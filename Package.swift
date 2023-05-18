@@ -7,11 +7,19 @@ let package = Package(
     name: "UpdateManagementiOS",
     targets: [
         /// Module targets
-        .target(name: "UpdateManagementiOS",     dependencies: [],             path: "Sources/UpdateManagementiOS"),
-        .target(name: "UpdateManagementiOSObjC", dependencies: ["UpdateManagementiOS"],   path: "Sources/UpdateManagementiOSObjC"),
+        .target(
+            name: "UpdateManagementiOS",
+                dependencies: [],
+            path: "Sources/UpdateManagementiOS"),
+        .target(
+            name: "UpdateManagementiOSObjC",
+            dependencies: ["UpdateManagementiOS"],
+            path: "Sources/UpdateManagementiOSObjC"),
 
         /// Tests
-        .testTarget(name: "UpdateManagementiOSTests",     dependencies: ["UpdateManagementiOS"],     path: "Tests/UpdateManagementiOSTests"),
+        .testTarget(name: "UpdateManagementiOSTests",
+                    dependencies: ["UpdateManagementiOS"],
+                    path: "Tests/UpdateManagementiOSTests"),
     ],
     swiftLanguageVersions: [.version("5")]
 )
