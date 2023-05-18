@@ -177,7 +177,7 @@ extension UpdateManagementiOS {
          
         if let reminderDate = sessionManager.getValue(forKey: "UpdateManagerReminderDate") {
             if currentDate == reminderDate as! Date {
-                iOptional = self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as! Bool
+                iOptional = self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as? Bool ?? true
             }
             else if currentDate < reminderDate as! Date {
                 iOptional = false
@@ -185,7 +185,7 @@ extension UpdateManagementiOS {
         }
         else {
             self.sessionManager.setValue(currentDate, forKey: "UpdateManagerReminderDate")
-            iOptional = true //self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as Bool ?? true
+            iOptional = self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as? Bool ?? true
         }
         return iOptional
         // if let reminderDate = UserDefaults.sharedGroup?.updateManagerRecurringAlert , currentDate == reminderDate {
@@ -218,16 +218,7 @@ enum UpdateMode: String {
     case Mandatory = "mandatory"
 }
 
-public class LocalisedText {
-    let UpdateManagementOptionalTitle = "Update Available"
-    let UpdateManagementMandatoryTitle = "Update Required";
-    let UpdateManagementOptional = "A new version of %@ is available. Would you like to update to version %@ now? \n\n";
-    let UpdateManagementMandatory = "A new version of %@ is available. You must update to version %@ to continue. ";
-    let UpdateManagementMandatoryWithDate = "A new version of %@ is available. You must update it before %@. Would you like to update to version %@ now? ";
-    let UpdateiOSForUpdateManagementOptional = "A new version of %@ is available. To continue to use the application you will need to upgrade your iOS to at least iOS %@ .";
-    let UpdateiOSUpdateManagementMandatory = "A new version of %@ is available. To use the new version, you will need to upgrade your iOS to at least iOS %@ .";
-}
-public class UpdateManagerFields {
+class UpdateManagerFields {
     
     var releaseDate:                    String?
     var platform:                       String?
@@ -263,4 +254,14 @@ public class UpdateManagerFields {
             break
         }
     }
+}
+
+class LocalisedText {
+    let UpdateManagementOptionalTitle = "Update Available"
+    let UpdateManagementMandatoryTitle = "Update Required";
+    let UpdateManagementOptional = "A new version of %@ is available. Would you like to update to version %@ now? \n\n";
+    let UpdateManagementMandatory = "A new version of %@ is available. You must update to version %@ to continue. ";
+    let UpdateManagementMandatoryWithDate = "A new version of %@ is available. You must update it before %@. Would you like to update to version %@ now? ";
+    let UpdateiOSForUpdateManagementOptional = "A new version of %@ is available. To continue to use the application you will need to upgrade your iOS to at least iOS %@ .";
+    let UpdateiOSUpdateManagementMandatory = "A new version of %@ is available. To use the new version, you will need to upgrade your iOS to at least iOS %@ .";
 }

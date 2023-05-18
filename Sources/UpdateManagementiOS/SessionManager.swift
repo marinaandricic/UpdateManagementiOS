@@ -7,9 +7,7 @@
 
 public struct SessionManager {
     private var sessionData: [String: Any] = [:]
-    
-    public init() {}
-    
+     
     public mutating func setValue(_ value: Any, forKey key: String) {
         sessionData[key] = value
     }
