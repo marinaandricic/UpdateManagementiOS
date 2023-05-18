@@ -11,8 +11,8 @@ import UIKit
 class CheckBox: UIButton {
     
     // Images for checkbox states
-    let checkedImage =  UIImage(named: "CheckBoxSelected")
-    let uncheckedImage = UIImage(named: "CheckBoxUnSelected")
+    var checkedImage: UIImage!
+    var uncheckedImage: UIImage!
      
     // Bool property to track the checked state
     var isChecked: Bool = false {
@@ -21,9 +21,13 @@ class CheckBox: UIButton {
         }
     }
     
-    override init(frame: CGRect) {
+    public init(frame: CGRect, checkedImage: String, uncheckedImage: String) {
         super.init(frame: frame)
         addTarget(self, action: #selector(checkboxTapped), for: .touchUpInside)
+        
+        self.checkedImage =  UIImage(named: checkedImage)
+        self.uncheckedImage = UIImage(named: uncheckedImage)
+         
         updateImage()
     }
     

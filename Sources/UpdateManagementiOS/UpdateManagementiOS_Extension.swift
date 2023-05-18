@@ -1,5 +1,5 @@
 //
-//  UpdateManagament_Extension.swift
+//  UpdateManagementiOS_Extension.swift
 //  
 //
 //  Created by Marina Andricic on 17/05/2023.
@@ -8,13 +8,11 @@
 import Foundation
 import UIKit
  
-extension UpdateManagament {
+extension UpdateManagementiOS {
+    
     func showUpdateiOSDialog(brand: String) {
         let alert = UIAlertController(title: self.getDialogTitle(), message: self.getDialogBodyiOSUpgrade(brand:brand), preferredStyle: .alert)
-        guard let url = URL(string: self.updateManagerFields.updateURL) else {
-            return
-        }
-        
+         
         let remindLaterAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler:nil)
         alert.addAction(remindLaterAction)
         
@@ -26,6 +24,7 @@ extension UpdateManagament {
             rootViewController.present(alert, animated: true, completion: nil)
         }
     }
+    
     func showUpdateOptionalDialog(brand: String) {
         
         let alert = UIAlertController(title: self.getDialogTitle(), message: self.getDialogBody(brand:brand), preferredStyle: .alert)
@@ -33,7 +32,8 @@ extension UpdateManagament {
         guard let url = URL(string: self.updateManagerFields.updateURL) else {
             return
         }
-        let checkbox = CheckBox(frame: CGRect(x: 50, y: 50, width: 20, height: 20))
+        let checkbox = CheckBox(frame: CGRect(x: 50, y: 50, width: 20, height: 20), checkedImage: self.checkBoxSelected_Image, uncheckedImage: self.checkBoxUnSelected_Image)
+        
         // include "Don't Remind Me Again" option only for optional update
         if (self.updateManagerFields.type == UpdateMode.Optional.rawValue) {
             
@@ -174,7 +174,7 @@ extension UpdateManagament {
         var iOptional = true
         self.sessionManager.removeValue(forKey: "UpdateManagerReminderDate")
         self.sessionManager.setValue("false", forKey: "UpdateManagerReminderShow")
-        let ReminderDate = sessionManager.getValue(forKey: "UpdateManagerReminderDate")
+         
         if let reminderDate = sessionManager.getValue(forKey: "UpdateManagerReminderDate") {
             if currentDate == reminderDate as! Date {
                 iOptional = self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as! Bool
@@ -211,6 +211,11 @@ extension UpdateManagament {
             //UserDefaults.sharedGroup?.updateManagerRecurringAlert =  reminderDare
         }
     }
+}
+
+enum UpdateMode: String {
+    case Optional = "optional"
+    case Mandatory = "mandatory"
 }
 
 public class LocalisedText {
