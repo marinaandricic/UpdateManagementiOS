@@ -59,6 +59,7 @@ extension UpdateManagementiOS {
             if (checkbox.isChecked && self.updateManagerFields.type == UpdateMode.Optional.rawValue) {
                 self.sessionManager.clearSession(key: self.sessionManager.UpdateManagerReminderDateKey)
                 self.sessionManager.UpdateManagerReminderShow = false
+                self.sessionManager.LatestUpdatedVersion = self.updateManagerFields.version
             } else {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
@@ -156,6 +157,7 @@ extension UpdateManagementiOS {
         
         if let reminderDare = calendar.date(byAdding: dateComponents, to: currentDate) {
             self.sessionManager.UpdateManagerReminderDate = reminderDare
+            self.sessionManager.LatestUpdatedVersion = self.updateManagerFields.version
         }
     }
     
@@ -202,7 +204,7 @@ extension UpdateManagementiOS {
     
     func checkLatestUpdateVersionNeedCleanUp () -> Bool {
         
-        let LatestUpdateVersion = self.sessionManager.LatestUpdatedVersion ?? self.localVersion
+        let LatestUpdateVersion = self.sessionManager.LatestUpdatedVersion ?? self.updateManagerFields.version
         
         let localVersionVSLatestUpdate = LatestUpdateVersion.compare(self.localVersion, options: .numeric)
         let localVersionVSServerVersion = self.updateManagerFields.version.compare(self.localVersion, options: .numeric)

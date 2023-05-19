@@ -64,7 +64,7 @@ public class UpdateManagementiOS: NSObject {
                     if self.checkLatestUpdateVersionNeedCleanUp() {
                         self.sessionManager.clearSession(key: self.sessionManager.UpdateManagerReminderDateKey)
                         self.sessionManager.UpdateManagerReminderShow = true
-                        self.sessionManager.LatestUpdatedVersion = self.localVersion
+                        self.sessionManager.LatestUpdatedVersion = self.updateManagerFields.version
                     }
                     
                     self.Update(completion: completion)
