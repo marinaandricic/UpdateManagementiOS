@@ -138,8 +138,7 @@ extension UpdateManagementiOS {
         
         if  currentDate == reminderDate  {
             return reminderShow
-        }
-        else if  currentDate < reminderDate  {
+        } else if  currentDate < reminderDate  {
             return false
         }  else {
             self.sessionManager.UpdateManagerReminderDate = currentDate

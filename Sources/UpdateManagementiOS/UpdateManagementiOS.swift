@@ -100,7 +100,6 @@ public class UpdateManagementiOS: NSObject {
                         if getOptionalReminderDate() {
                             // display optional alert
                             self.showUpdateOptionalDialog(brand: self.brand)
-                            return
                         }
                     } else {
                         // display mandatory alert
@@ -110,7 +109,9 @@ public class UpdateManagementiOS: NSObject {
                             // display mandatory alert
                             self.showUpdateMandatoryDialog(brand: self.brand)
                         }
-                    }// Update Type is optional
+                    }
+                   return
+                    // Update Type is optional
                 } else if self.updateManagerFields.type == UpdateMode.Optional.rawValue {
                     // check if previous mandatory version was installed
                     if self.updateManagerFields.previousMandatoryVersion?.compare(self.localVersion, options: .numeric) == .orderedDescending {
@@ -126,9 +127,10 @@ public class UpdateManagementiOS: NSObject {
                         if getOptionalReminderDate()  {
                             // display optional alert
                             self.showUpdateOptionalDialog(brand: self.brand)
-                            return
+                            
                         }
                     }
+                    return
                 } else {
                     return
                 }
