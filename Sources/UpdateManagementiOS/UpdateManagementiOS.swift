@@ -70,7 +70,7 @@ public class UpdateManagementiOS: NSObject {
         
         if self.updateManagerFields.version.compare(self.localVersion, options: .numeric) == .orderedDescending {
             var WaitTime = 0.0;
-            if (self.updateManagerFields.type == UpdateMode.Mandatory.rawValue) {
+            if (self.isMandatory == true) {
                 WaitTime = 3.0
             }
             // check device iOS version

@@ -90,7 +90,7 @@ extension UpdateManagementiOS {
         })
         
         // include cancel option only if Mandatory update end date is not nil
-        if isMandatory == false  {
+        if self.isMandatory == false  {
             let remindLaterAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 self.setOptionalReminderDate()
             })
@@ -123,7 +123,7 @@ extension UpdateManagementiOS {
             return String(format: NSLocalizedString(localizedText.UpdateManagementOptional, comment: ""), brand, self.updateManagerFields.version, self.updateManagerFields.platformMinTarget!)
         }
         else {
-            if isMandatory == true {
+            if self.isMandatory == true {
                 return String(format: NSLocalizedString(localizedText.UpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.version)
             }
             else {
@@ -162,7 +162,7 @@ extension UpdateManagementiOS {
             if resultCompare == .orderedAscending || resultCompare == .orderedSame {
                 return true
             } else {
-                isMandatory = true
+                self.isMandatory = true
                 return false
             }
         } else {
