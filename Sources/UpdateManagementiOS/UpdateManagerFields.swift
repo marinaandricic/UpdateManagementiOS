@@ -26,7 +26,7 @@ class UpdateManagerFields {
         case "platformMinTarget":
             self.platformMinTarget =  value
         case "version":
-            self.version = "12.14.3" // value
+            self.version = "12.14.4" // value
         case "type":
             self.type = "optional" //value.lowercased()
         case "updateBy":
