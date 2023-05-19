@@ -154,8 +154,11 @@ extension UpdateManagementiOS {
         
         let currentDate = Date()
         if let optionalUpdateEndDateString = self.updateManagerFields.updateBy {
-            let optionalUpdateEndDate = dateFormatter.date(from: optionalUpdateEndDateString)
-            if let endDate = optionalUpdateEndDate, currentDate <= endDate {
+            let optionalUpdateEndDate = dateFormatter.date(from: optionalUpdateEndDateString)!
+            
+            let resultCompare = currentDate.compare(optionalUpdateEndDate)
+           
+            if resultCompare == .orderedAscending || resultCompare == .orderedSame {
                 return true
             } else {
                 requireLogout = true
