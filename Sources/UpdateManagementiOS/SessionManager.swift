@@ -10,11 +10,21 @@ public struct  SessionManager {
     private let userDefaults: UserDefaults
     let UpdateManagerReminderDateKey = "UpdateManagerReminderDateKey"
     let UpdateManagerReminderShowKey = "UpdateManagerReminderShowKey"
+    let LatestUpdatedVersionKey = "LatestUpdatedVersionKey"
 
+    
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
     }
-
+    
+    var LatestUpdatedVersion: String? {
+        get {
+            return userDefaults.string(forKey: LatestUpdatedVersionKey)
+        }
+        set {
+            userDefaults.set(newValue, forKey: LatestUpdatedVersionKey)
+        }
+    }
     var UpdateManagerReminderDate: Date? {
         get {
             return userDefaults.object(forKey: UpdateManagerReminderDateKey) as? Date

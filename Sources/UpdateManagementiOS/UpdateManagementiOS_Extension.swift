@@ -200,7 +200,18 @@ extension UpdateManagementiOS {
         }
     }
     
-    
+    func checkLatestUpdateVersion () {
+        
+        let localVersionVSLatestUpdate = self.sessionManager.LatestUpdatedVersion?.compare(self.localVersion, options: .numeric)
+        let localVersionVSServerVersion = self.updateManagerFields.version.compare(self.localVersion, options: .numeric)
+         
+        if localVersionVSLatestUpdate == .orderedAscending && localVersionVSLatestUpdate == .orderedDescending {
+            self.sessionManager.clearSession(key: self.sessionManager.UpdateManagerReminderDateKey)
+            self.sessionManager.UpdateManagerReminderShow = true
+            self.sessionManager.LatestUpdatedVersion = self.localVersion
+        }
+         
+    }
 }
 
 enum UpdateMode: String {
