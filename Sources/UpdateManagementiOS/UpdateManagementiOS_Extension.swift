@@ -12,7 +12,7 @@ extension UpdateManagementiOS {
     
     func showUpdateiOSDialog(brand: String) {
         let alert = UIAlertController(title: self.getDialogTitle(), message: self.getDialogBodyiOSUpgrade(brand:brand), preferredStyle: .alert)
-         
+        
         let remindLaterAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler:nil)
         alert.addAction(remindLaterAction)
         
@@ -117,7 +117,7 @@ extension UpdateManagementiOS {
             let optionalUpdateEndDate = dateFormatter.date(from: optionalUpdateEndDateString)!
             
             let resultCompare = currentDate.compare(optionalUpdateEndDate)
-           
+            
             if resultCompare == .orderedAscending || resultCompare == .orderedSame {
                 return true
             } else {
@@ -131,7 +131,7 @@ extension UpdateManagementiOS {
     
     func getOptionalReminderDate() -> Bool {
         let currentDate = Date()
-          
+        
         let reminderDate = sessionManager.UpdateManagerReminderDate ?? currentDate
         let reminderShow = sessionManager.UpdateManagerReminderShow
         
@@ -148,7 +148,7 @@ extension UpdateManagementiOS {
     
     // UpdateManagerReminderDate is used to save date for next optional alert
     func setOptionalReminderDate() {
-      
+        
         let currentDate = Date()
         let calendar = Calendar.current
         var dateComponents = DateComponents()
@@ -190,7 +190,7 @@ extension UpdateManagementiOS {
             }
         }
     }
-     
+    
     func getDialogBodyiOSUpgrade(brand: String) -> String {
         if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
             return String(format: NSLocalizedString(localizedText.UpdateiOSForUpdateManagementOptional, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
@@ -200,17 +200,15 @@ extension UpdateManagementiOS {
         }
     }
     
-    func checkLatestUpdateVersion () {
+    func checkLatestUpdateVersionNeedCleanUp () -> Bool {
         
         let localVersionVSLatestUpdate = self.sessionManager.LatestUpdatedVersion?.compare(self.localVersion, options: .numeric)
         let localVersionVSServerVersion = self.updateManagerFields.version.compare(self.localVersion, options: .numeric)
-         
+        
         if localVersionVSLatestUpdate == .orderedAscending && localVersionVSLatestUpdate == .orderedDescending {
-            self.sessionManager.clearSession(key: self.sessionManager.UpdateManagerReminderDateKey)
-            self.sessionManager.UpdateManagerReminderShow = true
-            self.sessionManager.LatestUpdatedVersion = self.localVersion
+            return true
         }
-         
+        return false
     }
 }
 

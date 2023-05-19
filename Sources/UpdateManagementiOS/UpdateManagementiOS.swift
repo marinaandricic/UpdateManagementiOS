@@ -60,6 +60,13 @@ public class UpdateManagementiOS: NSObject {
                             self.updateManagerFields.updateValues(key: key, value: value)
                         }
                     }
+                    
+                    if self.checkLatestUpdateVersionNeedCleanUp() {
+                        self.sessionManager.clearSession(key: self.sessionManager.UpdateManagerReminderDateKey)
+                        self.sessionManager.UpdateManagerReminderShow = true
+                        self.sessionManager.LatestUpdatedVersion = self.localVersion
+                    }
+                    
                     self.Update(completion: completion)
                 } catch {
                     print("Error with data in jSON file \(fileURL): \(error)" )
