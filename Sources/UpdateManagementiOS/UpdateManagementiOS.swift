@@ -13,6 +13,7 @@ public class UpdateManagementiOS: NSObject {
     var sessionManager = SessionManager()
     
     let updateManagerFields = UpdateManagerFields();
+    let localizedText = LocalizedText();
     
     public var isMandatory = false;
     
@@ -34,7 +35,7 @@ public class UpdateManagementiOS: NSObject {
     public func Start( completion: @escaping (Bool) -> Void)  {
         
         //URL USED FOR TEST ONLY
-        let urlForBrand = String(format: NSLocalizedString("JSONUrl", comment: ""), self.brand)
+        let urlForBrand = String(format: NSLocalizedString(localizedText.JSONUrl, comment: ""), self.brand)
         if let fileURL = URL(string: urlForBrand) {
             
             let session = URLSession.shared

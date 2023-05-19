@@ -162,21 +162,21 @@ extension UpdateManagementiOS {
     // Different title will be displayed for mandatory and optional alerts
     func getDialogTitle() -> String {
         if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
-            return String(NSLocalizedString("UpdateManagementOptionalTitle", comment: ""))
+            return String(NSLocalizedString(localizedText.UpdateManagementOptionalTitle, comment: ""))
         }
         else {
-            return String(NSLocalizedString("UpdateManagementMandatoryTitle", comment: ""))
+            return String(NSLocalizedString(localizedText.UpdateManagementMandatoryTitle, comment: ""))
         }
     }
     
     // Different message will be displayed for mandatory, madatory with date and optional alerts
     private func getDialogBody(brand: String) -> String {
         if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
-            return String(format: NSLocalizedString("UpdateManagementOptional", comment: ""), brand, self.updateManagerFields.version, self.updateManagerFields.platformMinTarget!)
+            return String(format: NSLocalizedString(localizedText.UpdateManagementOptional, comment: ""), brand, self.updateManagerFields.version, self.updateManagerFields.platformMinTarget!)
         }
         else {
             if self.isMandatory == true {
-                return String(format: NSLocalizedString("UpdateManagementMandatory", comment: ""), brand, self.updateManagerFields.version)
+                return String(format: NSLocalizedString(localizedText.UpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.version)
             }
             else {
                 let updateBy = self.updateManagerFields.updateBy!
@@ -186,17 +186,17 @@ extension UpdateManagementiOS {
                 let optionalUpdateEndDate = dateFormatter.date(from: updateBy)!
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 
-                return String(format: NSLocalizedString("UpdateManagementMandatoryWithDate", comment: ""), brand, dateFormatter.string(from: optionalUpdateEndDate), self.updateManagerFields.version)
+                return String(format: NSLocalizedString(localizedText.UpdateManagementMandatoryWithDate, comment: ""), brand, dateFormatter.string(from: optionalUpdateEndDate), self.updateManagerFields.version)
             }
         }
     }
      
     func getDialogBodyiOSUpgrade(brand: String) -> String {
         if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
-            return String(format: NSLocalizedString("UpdateiOSForUpdateManagementOptional", comment: ""), brand, self.updateManagerFields.platformMinTarget!)
+            return String(format: NSLocalizedString(localizedText.UpdateiOSForUpdateManagementOptional, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
         }
         else {
-            return String(format: NSLocalizedString("UpdateiOSUpdateManagementMandatory", comment: ""), brand, self.updateManagerFields.platformMinTarget!)
+            return String(format: NSLocalizedString(localizedText.UpdateiOSUpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
         }
     }
     
@@ -206,4 +206,16 @@ extension UpdateManagementiOS {
 enum UpdateMode: String {
     case Optional = "optional"
     case Mandatory = "mandatory"
+}
+  
+class LocalizedText {
+    let JSONUrl = "https://j2-update.netlify.app/%@_iOS_current.json"
+    
+    let UpdateManagementOptionalTitle = "Update Available"
+    let UpdateManagementMandatoryTitle = "Update Required";
+    let UpdateManagementOptional = "A new version of %@ is available. Would you like to update to version %@ now? \n\n";
+    let UpdateManagementMandatory = "A new version of %@ is available. You must update to version %@ to continue. ";
+    let UpdateManagementMandatoryWithDate = "A new version of %@ is available. You must update it before %@. Would you like to update to version %@ now? ";
+    let UpdateiOSForUpdateManagementOptional = "A new version of %@ is available. To continue to use the application you will need to upgrade your iOS to at least iOS %@ .";
+    let UpdateiOSUpdateManagementMandatory = "A new version of %@ is available. To use the new version, you will need to upgrade your iOS to at least iOS %@ .";
 }
