@@ -57,8 +57,8 @@ extension UpdateManagementiOS {
         
         let updateAction = UIAlertAction(title: "OK", style: .default, handler: { action in
             if (checkbox.isChecked && self.updateManagerFields.type == UpdateMode.Optional.rawValue) {
-                self.sessionManager.removeValue(forKey: "UpdateManagerReminderDate")
-                self.sessionManager.setValue("false", forKey: "UpdateManagerReminderShow")
+                self.sessionManager.clearSession(key: self.sessionManager.UpdateManagerReminderDateKey)
+                self.sessionManager.UpdateManagerReminderShow = "false"
             } else {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
@@ -173,15 +173,14 @@ extension UpdateManagementiOS {
     func getOptionalReminderDate() -> Bool {
         let currentDate = Date()
         
-        if let reminderDate = sessionManager.getValue(forKey: "UpdateManagerReminderDate") , currentDate == reminderDate as! Date {
-            
-            return   self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as? Bool ?? true
-        } else if let reminderDate = sessionManager.getValue(forKey: "UpdateManagerReminderDate") , currentDate < reminderDate as! Date {
-            return false
+        if let reminderDate = sessionManager.UpdateManagerReminderDate , currentDate == reminderDate as! Date  {
+            return self.sessionManager.UpdateManagerReminderShow as? Bool ?? true
         }
-        else {
-            self.sessionManager.setValue(currentDate, forKey: "UpdateManagerReminderDate")
-            return self.sessionManager.getValue(forKey: "UpdateManagerReminderShow") as? Bool ?? true
+        else if let reminderDate = sessionManager.UpdateManagerReminderDate , currentDate <= reminderDate as! Date  {
+            return false
+        }  else {
+            self.sessionManager.UpdateManagerReminderDate = currentDate
+            return self.sessionManager.UpdateManagerReminderShow as? Bool ?? true
         }
     }
     
@@ -193,7 +192,7 @@ extension UpdateManagementiOS {
         dateComponents.day = self.updateManagerFields.reminders ?? 0
         
         if let reminderDare = calendar.date(byAdding: dateComponents, to: currentDate) {
-            self.sessionManager.setValue(reminderDare, forKey: "UpdateManagerReminderDate")
+            self.sessionManager.UpdateManagerReminderDate = reminderDare
         }
     }
 }
