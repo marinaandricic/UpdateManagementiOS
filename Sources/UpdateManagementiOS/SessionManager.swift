@@ -16,18 +16,18 @@ struct SessionManager {
         self.userDefaults = userDefaults
     }
 
-    var UpdateManagerReminderDate: Any? {
+    var UpdateManagerReminderDate: Date? {
         get {
-            return userDefaults.string(forKey: UpdateManagerReminderDateKey)
+            return userDefaults.string(forKey: UpdateManagerReminderDateKey) as? Date
         }
         set {
             userDefaults.set(newValue, forKey: UpdateManagerReminderDateKey)
         }
     }
     
-    var UpdateManagerReminderShow: Any? {
+    var UpdateManagerReminderShow: Bool? {
         get {
-            return userDefaults.string(forKey: UpdateManagerReminderShowKey)
+            return userDefaults.string(forKey: UpdateManagerReminderShowKey) as? Bool
         }
         set {
             userDefaults.set(newValue, forKey: UpdateManagerReminderShowKey)

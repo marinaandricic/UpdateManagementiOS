@@ -58,7 +58,7 @@ extension UpdateManagementiOS {
         let updateAction = UIAlertAction(title: "OK", style: .default, handler: { action in
             if (checkbox.isChecked && self.updateManagerFields.type == UpdateMode.Optional.rawValue) {
                 self.sessionManager.clearSession(key: self.sessionManager.UpdateManagerReminderDateKey)
-                self.sessionManager.UpdateManagerReminderShow = "false"
+                self.sessionManager.UpdateManagerReminderShow = false
             } else {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }

@@ -124,7 +124,7 @@ public class UpdateManagementiOS: NSObject {
         } else {
             // if version on server is greater than local we clear session for recurring Update alerts and re-set UpdateManagerReminderShow to true
             self.sessionManager.clearSession(key: self.sessionManager.UpdateManagerReminderDateKey)
-            self.sessionManager.UpdateManagerReminderShow = "true"
+            self.sessionManager.UpdateManagerReminderShow = true
         }
     }
 }
