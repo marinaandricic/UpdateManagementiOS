@@ -150,7 +150,7 @@ extension UpdateManagementiOS {
     var isMandatoryOptional: Bool {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm.ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
         let currentDate = Date()
         if let optionalUpdateEndDateString = self.updateManagerFields.updateBy {
