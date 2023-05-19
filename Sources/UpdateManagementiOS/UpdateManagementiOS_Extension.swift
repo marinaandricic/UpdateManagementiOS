@@ -202,7 +202,9 @@ extension UpdateManagementiOS {
     
     func checkLatestUpdateVersionNeedCleanUp () -> Bool {
         
-        let localVersionVSLatestUpdate = self.sessionManager.LatestUpdatedVersion?.compare(self.localVersion, options: .numeric)
+        let LatestUpdateVersion = self.sessionManager.LatestUpdatedVersion ?? self.localVersion
+        
+        let localVersionVSLatestUpdate = LatestUpdateVersion.compare(self.localVersion, options: .numeric)
         let localVersionVSServerVersion = self.updateManagerFields.version.compare(self.localVersion, options: .numeric)
         
         if localVersionVSLatestUpdate == .orderedAscending && localVersionVSLatestUpdate == .orderedDescending {
