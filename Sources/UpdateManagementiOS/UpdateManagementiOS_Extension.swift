@@ -17,7 +17,7 @@ extension UpdateManagementiOS {
         alert.addAction(remindLaterAction)
         
         DispatchQueue.main.async {
-            self.requireLogout = true
+            self.isMandatory = true
             guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
                 return
             }
@@ -90,7 +90,7 @@ extension UpdateManagementiOS {
         })
         
         // include cancel option only if Mandatory update end date is not nil
-        if let dateEnd = self.updateManagerFields.updateBy, dateEnd != "" {
+        if isMandatory == false  {
             let remindLaterAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 self.setOptionalReminderDate()
             })
@@ -99,7 +99,7 @@ extension UpdateManagementiOS {
         alert.addAction(updateAction)
         
         DispatchQueue.main.async {
-            self.requireLogout = true
+            self.isMandatory = true
             guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
                 return
             }
@@ -123,17 +123,18 @@ extension UpdateManagementiOS {
             return String(format: NSLocalizedString(localizedText.UpdateManagementOptional, comment: ""), brand, self.updateManagerFields.version, self.updateManagerFields.platformMinTarget!)
         }
         else {
-            if let updateBy = self.updateManagerFields.updateBy, updateBy != "" {
+            if isMandatory == true {
+                return String(format: NSLocalizedString(localizedText.UpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.version)
+            }
+            else {
+                let updateBy = self.updateManagerFields.updateBy!
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm.ssZ"
-                if let optionalUpdateEndDate = dateFormatter.date(from: updateBy) {
-                    dateFormatter.dateFormat = "yyyy-MM-dd"
-                    return String(format: NSLocalizedString(localizedText.UpdateManagementMandatoryWithDate, comment: ""), brand, dateFormatter.string(from: optionalUpdateEndDate), self.updateManagerFields.version)
-                } else {
-                    return String(format: NSLocalizedString(localizedText.UpdateManagementMandatoryWithDate, comment: ""), brand, updateBy, self.updateManagerFields.version)
-                }
-            } else {
-                return String(format: NSLocalizedString(localizedText.UpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.version)
+                
+                let optionalUpdateEndDate = dateFormatter.date(from: updateBy)!
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                
+                return String(format: NSLocalizedString(localizedText.UpdateManagementMandatoryWithDate, comment: ""), brand, dateFormatter.string(from: optionalUpdateEndDate), self.updateManagerFields.version)
             }
         }
     }
@@ -161,7 +162,7 @@ extension UpdateManagementiOS {
             if resultCompare == .orderedAscending || resultCompare == .orderedSame {
                 return true
             } else {
-                requireLogout = true
+                isMandatory = true
                 return false
             }
         } else {

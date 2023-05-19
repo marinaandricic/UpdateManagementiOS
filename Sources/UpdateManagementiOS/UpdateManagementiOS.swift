@@ -14,7 +14,7 @@ public class UpdateManagementiOS: NSObject {
     let updateManagerFields = UpdateManagerFields();
     let localizedText = LocalizedText();
     
-    public var requireLogout = false;
+    public var isMandatory = false;
     
     var brand: String
     var localVersion: String
