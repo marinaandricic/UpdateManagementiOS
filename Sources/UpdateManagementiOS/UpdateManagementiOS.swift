@@ -69,7 +69,7 @@ public class UpdateManagementiOS: NSObject {
     private func Update(completion: @escaping (Bool) -> Void) {
         
         if self.updateManagerFields.version.compare(self.localVersion, options: .numeric) == .orderedDescending {
-            var WaitTime = 2.0;
+            var WaitTime = 3.0;
              
             // check device iOS version
             let deviceVersion = UIDevice.current.systemVersion
