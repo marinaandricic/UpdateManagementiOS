@@ -60,11 +60,10 @@ public class UpdateManagementiOS: NSObject {
                             self.updateManagerFields.updateValues(key: key, value: value)
                         }
                     }
-                    
+                    // if current server update version is greater than previous where upgrade was not complited but cancelation of alert was selected, we need to remove setting from previous uninstalled version
                     if self.checkLatestUpdateVersionNeedCleanUp() {
                         self.sessionManager.clearSession(key: self.sessionManager.UpdateManagerReminderDateKey)
                         self.sessionManager.UpdateManagerReminderShow = true
-                        self.sessionManager.LatestUpdatedVersion = self.updateManagerFields.version
                     }
                     
                     self.Update(completion: completion)
