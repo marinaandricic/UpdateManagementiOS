@@ -172,7 +172,9 @@ extension UpdateManagementiOS {
     
     func getOptionalReminderDate() -> Bool {
         let currentDate = Date()
-        
+         
+        sessionManager.UpdateManagerReminderDate = Date()
+      
         if let reminderDate = sessionManager.UpdateManagerReminderDate , currentDate == reminderDate as! Date  {
             return self.sessionManager.UpdateManagerReminderShow as? Bool ?? true
         }
@@ -186,6 +188,8 @@ extension UpdateManagementiOS {
     
     // UpdateManagerReminderDate is used to save date for next alert
     func setOptionalReminderDate() {
+        sessionManager.UpdateManagerReminderDate = Date()
+      
         let currentDate = Date()
         let calendar = Calendar.current
         var dateComponents = DateComponents()

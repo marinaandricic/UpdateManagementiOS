@@ -11,6 +11,7 @@ import UIKit
 public class UpdateManagementiOS: NSObject {
     
     var sessionManager = SessionManager()
+    
     let updateManagerFields = UpdateManagerFields();
     let localizedText = LocalizedText();
     
@@ -26,6 +27,8 @@ public class UpdateManagementiOS: NSObject {
         self.localVersion = localVersion
         self.checkBoxSelected_Image = checkBoxSelected_Image
         self.checkBoxUnSelected_Image = checkBoxUnSelected_Image
+        
+       
     }
     
     @objc(StartUpdateProcessWithcompletion:)

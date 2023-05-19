@@ -7,7 +7,7 @@
 
 import Foundation
  
-struct SessionManager {
+public struct  SessionManager {
     private let userDefaults: UserDefaults
     let UpdateManagerReminderDateKey = "UpdateManagerReminderDateKey"
     let UpdateManagerReminderShowKey = "UpdateManagerReminderShowKey"
