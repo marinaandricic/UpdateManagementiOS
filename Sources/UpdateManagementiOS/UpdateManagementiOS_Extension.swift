@@ -176,14 +176,14 @@ extension UpdateManagementiOS {
         sessionManager.UpdateManagerReminderDate = Date()
         let reminderDate = sessionManager.UpdateManagerReminderDate
         
-        if  currentDate == reminderDate as! Date  {
-            return self.sessionManager.UpdateManagerReminderShow as? Bool ?? true
+        if  currentDate == reminderDate!  {
+            return self.sessionManager.UpdateManagerReminderShow
         }
-        else if  currentDate <= reminderDate as! Date  {
+        else if  currentDate <= reminderDate!  {
             return false
         }  else {
             self.sessionManager.UpdateManagerReminderDate = currentDate
-            return self.sessionManager.UpdateManagerReminderShow as? Bool ?? true
+            return self.sessionManager.UpdateManagerReminderShow
         }
     }
     

@@ -25,9 +25,9 @@ public struct  SessionManager {
         }
     }
     
-    var UpdateManagerReminderShow: Bool? {
+    var UpdateManagerReminderShow: Bool {
         get {
-            return userDefaults.object(forKey: UpdateManagerReminderShowKey) as? Bool
+            return userDefaults.object(forKey: UpdateManagerReminderShowKey) as? Bool ?? true
         }
         set {
             userDefaults.set(newValue, forKey: UpdateManagerReminderShowKey)
