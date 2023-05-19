@@ -206,10 +206,10 @@ extension UpdateManagementiOS {
         
         let LatestUpdateVersion = self.sessionManager.LatestUpdatedVersion ?? self.updateManagerFields.version
         
-        let localVersionVSLatestUpdate = LatestUpdateVersion.compare(self.localVersion, options: .numeric)
-        let localVersionVSServerVersion = self.updateManagerFields.version.compare(self.localVersion, options: .numeric)
+        let LatestUpdateVSLocal = LatestUpdateVersion.compare(self.localVersion, options: .numeric)
+        let LatestUpdateVSServerVersion = LatestUpdateVersion.compare(self.updateManagerFields.version, options: .numeric)
         
-        if localVersionVSLatestUpdate == .orderedAscending && localVersionVSLatestUpdate == .orderedDescending {
+        if LatestUpdateVSLocal == .orderedAscending && LatestUpdateVSServerVersion == .orderedDescending {
             return true
         }
         return false
