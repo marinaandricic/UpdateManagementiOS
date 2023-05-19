@@ -173,13 +173,13 @@ extension UpdateManagementiOS {
     func getOptionalReminderDate() -> Bool {
         let currentDate = Date()
           
-        let reminderDate = sessionManager.UpdateManagerReminderDate
+        let reminderDate = sessionManager.UpdateManagerReminderDate ?? currentDate
         let reminderShow = sessionManager.UpdateManagerReminderShow
         
-        if  currentDate == reminderDate!  {
+        if  currentDate == reminderDate  {
             return reminderShow
         }
-        else if  currentDate < reminderDate!  {
+        else if  currentDate < reminderDate  {
             return false
         }  else {
             self.sessionManager.UpdateManagerReminderDate = currentDate

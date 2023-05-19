@@ -1,6 +1,6 @@
 //
 //  SessionManager.swift
-//   
+//
 //  Created by Marina Andricic on 17/05/2023.
 //
 
@@ -17,7 +17,7 @@ public struct  SessionManager {
 
     var UpdateManagerReminderDate: Date? {
         get {
-            return userDefaults.object(forKey: UpdateManagerReminderDateKey) as? Date ?? Date()
+            return userDefaults.object(forKey: UpdateManagerReminderDateKey) as? Date
         }
         set {
             userDefaults.set(newValue, forKey: UpdateManagerReminderDateKey)
