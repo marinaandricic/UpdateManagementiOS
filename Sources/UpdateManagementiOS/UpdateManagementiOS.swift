@@ -100,6 +100,7 @@ public class UpdateManagementiOS: NSObject {
                         if getOptionalReminderDate() {
                             // display optional alert
                             self.showUpdateOptionalDialog(brand: self.brand)
+                            return
                         }
                     } else {
                         // display mandatory alert
@@ -125,6 +126,7 @@ public class UpdateManagementiOS: NSObject {
                         if getOptionalReminderDate()  {
                             // display optional alert
                             self.showUpdateOptionalDialog(brand: self.brand)
+                            return
                         }
                     }
                 } else {
