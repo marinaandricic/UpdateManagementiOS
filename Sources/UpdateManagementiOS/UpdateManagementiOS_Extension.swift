@@ -158,7 +158,7 @@ extension UpdateManagementiOS {
             
             let resultCompare = currentDate.compare(optionalUpdateEndDate)
            
-            if resultCompare == .orderedAscending || resultCompare == .orderedSame {
+            if resultCompare == .orderedDescending || resultCompare == .orderedSame {
                 return true
             } else {
                 requireLogout = true
