@@ -227,8 +227,8 @@ class UpdateManagerFields {
             self.version = "12.15.1"// value
         case "type":
             self.type = value.lowercased()
-        case "updateBy":
-            self.updateBy = value //"2023-05-31" //
+       // case "updateBy":
+            //self.updateBy = value //"2023-05-31" //
         case "updateURL":
             self.updateURL =  value
         case "reminders":
