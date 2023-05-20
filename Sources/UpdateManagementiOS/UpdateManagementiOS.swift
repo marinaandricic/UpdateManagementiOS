@@ -18,27 +18,26 @@ public class UpdateManagementiOS: NSObject {
     public var isMandatory = false;
     
     var brand: String
+    var jSONURL: String
     var localVersion: String
     var checkBoxSelected_Image: String
     var checkBoxUnSelected_Image: String
      
-    public init(brand: String, localVersion: String, checkBoxSelected_Image: String, checkBoxUnSelected_Image: String) {
+    public init(brand: String, jSONURL: String, localVersion: String, checkBoxSelected_Image: String, checkBoxUnSelected_Image: String) {
         self.brand = brand
+        self.jSONURL = jSONURL
         self.localVersion = localVersion
         self.checkBoxSelected_Image = checkBoxSelected_Image
         self.checkBoxUnSelected_Image = checkBoxUnSelected_Image
-        
-       
     }
-    
-    @objc(StartUpdateProcessWithcompletion:)
+     
     public func Start( completion: @escaping (Bool) -> Void)  {
-        
-        //URL USED FOR TEST ONLY
-        let urlForBrand = String(format: NSLocalizedString(localizedText.JSONUrl, comment: ""), self.brand)
+         
+        let urlForBrand = String(format: NSLocalizedString(self.jSONURL, comment: ""), self.brand)
         if let fileURL = URL(string: urlForBrand) {
             
             let session = URLSession.shared
+            
             let task = session.dataTask(with: fileURL) { [self] (data, response, error) in
                 if let error = error {
                     print( "error with jSON file \(error.localizedDescription)" )

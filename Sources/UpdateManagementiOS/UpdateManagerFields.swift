@@ -30,13 +30,13 @@ class UpdateManagerFields {
         case "type":
             self.type = "optional" //value.lowercased()
         case "updateBy":
-            self.updateBy = value 
+            self.updateBy = value
         case "updateURL":
             self.updateURL =  value
         case "reminders":
             self.reminders = Int(value) != nil ? Int(value) : nil
         case "previousMandatoryVersionCode":
-            self.previousMandatoryVersion = value
+            self.previousMandatoryVersion = "12.13" //value
         default:
             break
         }

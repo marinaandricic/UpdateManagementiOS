@@ -14,7 +14,6 @@ class CheckBox: UIButton {
     var checkedImage: UIImage!
     var uncheckedImage: UIImage!
      
-    // Bool property to track the checked state
     var isChecked: Bool = false {
         didSet {
             updateImage()
