@@ -47,7 +47,7 @@ public class UpdateManagementiOS: NSObject {
                     }
                     guard let jsonObject = try JSONSerialization.jsonObject(with: manifestData, options: .allowFragments) as? [String: String]
                     else {
-                        print("\(fileURL).json file is not in the correct format")
+                        print("\(fileURL) file is not in the correct format")
                         return
                     }
                     if let manifestValues = jsonObject as? [String: String] {
