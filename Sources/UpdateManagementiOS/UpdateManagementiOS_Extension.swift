@@ -162,7 +162,7 @@ extension UpdateManagementiOS {
     
     // Different title will be displayed for mandatory and optional alerts
     func getDialogTitle() -> String {
-        if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
+        if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) && self.isMandatory == false ) {
             return String(NSLocalizedString(localizedText.UpdateManagementOptionalTitle, comment: ""))
         }
         else {
@@ -172,12 +172,12 @@ extension UpdateManagementiOS {
     
     // Different message will be displayed for mandatory, madatory with date and optional alerts
     private func getDialogBody(brand: String) -> String {
-        if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
-            return String(format: NSLocalizedString(localizedText.UpdateManagementOptional, comment: ""), brand, self.updateManagerFields.version, self.updateManagerFields.platformMinTarget!)
+        if self.isMandatory == true {
+            return String(format: NSLocalizedString(localizedText.UpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.version)
         }
         else {
-            if self.isMandatory == true {
-                return String(format: NSLocalizedString(localizedText.UpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.version)
+            if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
+                return String(format: NSLocalizedString(localizedText.UpdateManagementOptional, comment: ""), brand, self.updateManagerFields.version, self.updateManagerFields.platformMinTarget!)
             }
             else {
                 let updateBy = self.updateManagerFields.updateBy!
@@ -193,11 +193,16 @@ extension UpdateManagementiOS {
     }
     
     func getDialogBodyiOSUpgrade(brand: String) -> String {
-        if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
-            return String(format: NSLocalizedString(localizedText.UpdateiOSForUpdateManagementOptional, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
+        if self.isMandatory == true {
+            return String(format: NSLocalizedString(localizedText.UpdateiOSUpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
         }
         else {
-            return String(format: NSLocalizedString(localizedText.UpdateiOSUpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
+            if ((self.updateManagerFields.type == UpdateMode.Optional.rawValue) ) {
+                return String(format: NSLocalizedString(localizedText.UpdateiOSForUpdateManagementOptional, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
+            }
+            else {
+                return String(format: NSLocalizedString(localizedText.UpdateiOSUpdateManagementMandatory, comment: ""), brand, self.updateManagerFields.platformMinTarget!)
+            }
         }
     }
     

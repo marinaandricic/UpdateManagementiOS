@@ -115,6 +115,7 @@ public class UpdateManagementiOS: NSObject {
                     if self.updateManagerFields.previousMandatoryVersion?.compare(self.localVersion, options: .numeric) == .orderedDescending {
                         // logout user if Mandatory update
                         completion(true)
+                        self.isMandatory = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + WaitTime) {
                             // display mandatory alert
                             self.showUpdateMandatoryDialog(brand: self.brand)

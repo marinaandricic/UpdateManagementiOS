@@ -23,16 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "451EACA1-9CA7-49B7-A1C0-6C5D11EFF2BD"
+            uuid = "C1854874-F40B-4818-841A-4690714F1793"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sources/UpdateManagementiOS/UpdateManagementiOS.swift"
+            filePath = "Sources/UpdateManagementiOS/UpdateManagementiOS_Extension.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "Update(completion:)"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "showUpdateMandatoryDialog(brand:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
