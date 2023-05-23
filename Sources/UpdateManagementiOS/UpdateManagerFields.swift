@@ -26,7 +26,7 @@ class UpdateManagerFields {
         case "platformMinTarget":
             self.platformMinTarget =  value
         case "version":
-            self.version = "12.14.7" // value
+            self.version = "12.15.7" // value
         case "type":
             self.type = "optional" //value.lowercased()
         case "updateBy":
@@ -36,7 +36,7 @@ class UpdateManagerFields {
         case "reminders":
             self.reminders = Int(value) != nil ? Int(value) : nil
         case "previousMandatoryVersionCode":
-            self.previousMandatoryVersion = "12.13" //value
+            self.previousMandatoryVersion = "12.15.2" //value
         default:
             break
         }
