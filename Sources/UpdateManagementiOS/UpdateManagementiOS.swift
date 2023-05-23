@@ -75,7 +75,7 @@ public class UpdateManagementiOS: NSObject {
     private func Update(completion: @escaping (Bool) -> Void) {
         
         if self.updateManagerFields.version.compare(self.localVersion, options: .numeric) == .orderedDescending {
-            let WaitTime = 3.0;
+            let WaitTime = 2.0;
              
             // check device iOS version
             let deviceVersion = UIDevice.current.systemVersion
@@ -115,7 +115,6 @@ public class UpdateManagementiOS: NSObject {
                     if self.updateManagerFields.previousMandatoryVersion?.compare(self.localVersion, options: .numeric) == .orderedDescending {
                         // logout user if Mandatory update
                         completion(true)
-                      
                         DispatchQueue.main.asyncAfter(deadline: .now() + WaitTime) {
                             // display mandatory alert
                             self.showUpdateMandatoryDialog(brand: self.brand)
