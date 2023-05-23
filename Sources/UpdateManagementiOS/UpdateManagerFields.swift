@@ -36,7 +36,7 @@ class UpdateManagerFields {
         case "reminders":
             self.reminders = Int(value) != nil ? Int(value) : nil
         case "previousMandatoryVersionCode":
-            self.previousMandatoryVersion = "12.15.2" //value
+            self.previousMandatoryVersion = "12.14" //value
         default:
             break
         }
