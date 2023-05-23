@@ -112,7 +112,7 @@ public class UpdateManagementiOS: NSObject {
                     // Update Type is optional
                 } else if self.updateManagerFields.type == UpdateMode.Optional.rawValue {
                     // check if previous mandatory version was installed
-                    if self.updateManagerFields.previousMandatoryVersion?.compare(self.localVersion, options: .numeric) == .orderedDescending {
+                    if self.updateManagerFields.previousMandatoryVersion?.compare(self.localVersion, options: .numeric) == .orderedAscending {
                         // logout user if Mandatory update
                         completion(true)
                         self.isMandatory = true
