@@ -20,12 +20,12 @@ class CheckBox: UIButton {
         }
     }
     
-    public init(frame: CGRect, checkedImage: String, uncheckedImage: String) {
+    public init(frame: CGRect, checkedImage: UIImage, uncheckedImage: UIImage) {
         super.init(frame: frame)
         addTarget(self, action: #selector(checkboxTapped), for: .touchUpInside)
         
-        self.checkedImage =  UIImage(named: checkedImage)
-        self.uncheckedImage = UIImage(named: uncheckedImage)
+        self.checkedImage = checkedImage
+        self.uncheckedImage = uncheckedImage
          
         updateImage()
     }

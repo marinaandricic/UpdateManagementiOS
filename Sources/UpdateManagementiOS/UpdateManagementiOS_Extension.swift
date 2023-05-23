@@ -221,8 +221,6 @@ enum UpdateMode: String {
 }
   
 class LocalizedText {
-    let JSONUrl = "https://j2-update.netlify.app/%@_iOS_current.json"
-    
     let UpdateManagementOptionalTitle = "Update Available"
     let UpdateManagementMandatoryTitle = "Update Required";
     let UpdateManagementOptional = "A new version of %@ is available. Would you like to update to version %@ now? \n\n";

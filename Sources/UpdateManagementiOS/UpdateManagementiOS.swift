@@ -18,19 +18,21 @@ public class UpdateManagementiOS: NSObject {
     public var isMandatory = false;
     
     var brand: String
+    var url: String
     var localVersion: String
-    var checkBoxSelected_Image: String
-    var checkBoxUnSelected_Image: String
+    var checkBoxSelected_Image: UIImage
+    var checkBoxUnSelected_Image: UIImage
      
-    public init(brand: String, localVersion: String, checkBoxSelected_Image: String, checkBoxUnSelected_Image: String) {
+    public init(brand: String, url: String, localVersion: String, checkBoxSelected_Image: UIImage, checkBoxUnSelected_Image: UIImage) {
         self.brand = brand
+        self.url = url
         self.localVersion = localVersion
         self.checkBoxSelected_Image = checkBoxSelected_Image
         self.checkBoxUnSelected_Image = checkBoxUnSelected_Image
     }
     @objc(StartUpdateProcessWithcompletion:)
     public func Start( completion: @escaping (Bool) -> Void)  {
-        let urlForBrand = String(format: NSLocalizedString(localizedText.JSONUrl, comment: ""), self.brand)
+        let urlForBrand = String(format: NSLocalizedString(url, comment: ""), self.brand)
         if let fileURL = URL(string: urlForBrand) {
             
             let session = URLSession.shared
