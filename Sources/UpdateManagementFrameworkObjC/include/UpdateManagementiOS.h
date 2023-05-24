@@ -1,5 +1,5 @@
 /**
- *   UpdateManagementiOS.h
+ *   UpdateManagementFramework.h
  *
  *   Copyright 2015 The Climate Corporation
  *   Copyright 2015 Tony Stone
@@ -18,8 +18,8 @@
  *
  *   Created by Tony Stone on 3/4/15.
  */
-#ifndef Pods_UpdateManagementiOS_h
-#define Pods_UpdateManagementiOS_h
+#ifndef Pods_UpdateManagementFramework_h
+#define Pods_UpdateManagementFramework_h
 
 /// Instance level macros
 
@@ -123,7 +123,7 @@
 /*
  WARNING:  LogIfEnabled is private and should not be used directly
  */
-#if !UpdateManagementiOS_DISABLED
+#if !UpdateManagementFramework_DISABLED
     #define LogIfEnabled(logLevel,tagName,format,...) [TLLogger logPrimitive: logLevel tag: tagName file: [NSString stringWithUTF8String: __FILE__] function: [NSString stringWithUTF8String: __FUNCTION__] line: __LINE__ message: ^{ return [NSString stringWithFormat: format, ##__VA_ARGS__]; }]
 #else
     #define LogIfEnabled(logLevel,tagName,format, ...) ((void)0)
@@ -178,14 +178,14 @@
 #if !COCOAPODS
 ///
 /// Swift Package Manager requires these to be declared otherwise, the
-/// UpdateManagementiOS module needs to be included with this header for Objective-C
+/// UpdateManagementFramework module needs to be included with this header for Objective-C
 /// which is undesierable.
 ///
 #import <Foundation/Foundation.h>
 
 /// Internal class exposed to objective-C for low level logging.
 ///
-/// - Warning:  This is a private class and nothing in this class should be used on it's own.  Please see UpdateManagementiOS.h for the public interface to this.
+/// - Warning:  This is a private class and nothing in this class should be used on it's own.  Please see UpdateManagementFramework.h for the public interface to this.
 ///
 /// - Note: In order to continue to support Objective-C, this class must be public and also visible to both Swift and ObjC.  This class is not meant to be
 ///         used directly in either language.

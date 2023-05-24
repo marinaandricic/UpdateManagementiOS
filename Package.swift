@@ -4,17 +4,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "UpdateManagementiOS",
+    name: "UpdateManagementFramework",
     targets: [
         /// Module targets
-        .target(name: "UpdateManagementiOS",     dependencies: [],             path: "Sources/UpdateManagementiOS"),
-        .target(name: "UpdateManagementiOSObjC", dependencies: ["UpdateManagementiOS"],   path: "Sources/UpdateManagementiOSObjC"),
+        .target(name: "UpdateManagementFramework",     dependencies: [],             path: "Sources/UpdateManagementFramework"),
+        .target(name: "UpdateManagementFrameworkObjC", dependencies: ["UpdateManagementFramework"],   path: "Sources/UpdateManagementFrameworkObjC"),
 
         /// Tests
-        .testTarget(name: "UpdateManagementiOSTests",     dependencies: ["UpdateManagementiOS"],     path: "Tests/UpdateManagementiOSTests"),
+        .testTarget(name: "UpdateManagementFrameworkTests",     dependencies: ["UpdateManagementFramework"],     path: "Tests/UpdateManagementFrameworkTests"),
     ],
     swiftLanguageVersions: [.version("5")]
 )
 
 /// Main products section
-package.products.append(.library(name: "UpdateManagementiOS", type: .dynamic, targets: ["UpdateManagementiOS", "UpdateManagementiOSObjC"]))
+package.products.append(.library(name: "UpdateManagementFramework", type: .dynamic, targets: ["UpdateManagementFramework", "UpdateManagementFrameworkObjC"]))

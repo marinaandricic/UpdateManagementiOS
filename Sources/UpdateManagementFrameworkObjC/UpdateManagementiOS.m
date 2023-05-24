@@ -1,5 +1,5 @@
 //
-//  UpdateManagementiOS.m
+//  UpdateManagementFramework.m
 //  
 //
 //  Created by Marina Andricic on 18/05/2023.

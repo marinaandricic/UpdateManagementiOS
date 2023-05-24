@@ -1,5 +1,5 @@
 //
-//  UpdateManagementiOS.swift
+//  UpdateManagementFramework.swift
 //
 //
 //  Created by Marina Andricic on 17/05/2023.
@@ -8,7 +8,7 @@
 import UIKit
 
 @objcMembers
-public class UpdateManagementiOS: NSObject {
+public class UpdateManagementFramework: NSObject {
     
     var sessionManager = SessionManager()
     

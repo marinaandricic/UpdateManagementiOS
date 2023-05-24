@@ -1,5 +1,5 @@
 //
-//  UpdateManagementiOS_Extension.swift
+//  UpdateManagementFramework_Extension.swift
 //  
 //
 //  Created by Marina Andricic on 17/05/2023.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
  
-extension UpdateManagementiOS {
+extension UpdateManagementFramework {
     
     func showUpdateiOSDialog(brand: String) {
         let alert = UIAlertController(title: self.getDialogTitle(), message: self.getDialogBodyiOSUpgrade(brand:brand), preferredStyle: .alert)
