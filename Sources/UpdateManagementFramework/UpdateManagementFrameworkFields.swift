@@ -1,11 +1,11 @@
 //
-//  UpdateManagerFields.swift
+//  UpdateManagementFrameworkFields.swift
 //  
 //
 //  Created by Marina Andricic on 19/05/2023.
 //
  
-class UpdateManagerFields {
+class UpdateManagementFrameworkFields {
     
     var releaseDate:                    String?
     var platform:                       String?

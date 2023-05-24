@@ -12,7 +12,7 @@ public class UpdateManagementFramework: NSObject {
     
     var sessionManager = SessionManager()
     
-    let updateManagerFields = UpdateManagerFields();
+    let updateManagerFields = UpdateManagementFrameworkFields();
     let localizedText = LocalizedText();
     
     public var isMandatory = false;
